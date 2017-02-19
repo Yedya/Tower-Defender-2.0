@@ -38,56 +38,90 @@ public class C_TurretNormal : C_TurretParent {
 		scanForEnemies();
 	}
 
+
+	/**
+	* Set Cooldown time
+	*/
 	public override void setCoolDownTime(float coolDownParam)
 	{
 		fireCooldown = coolDownParam;
 	}
 
+	/**
+	* Set attack radius for turret
+	*/
 	public override void setAttackRadius(float attackRadiusParam)
 	{
 		attackRadius = attackRadiusParam;
 	}
 
+	/**
+	* Set the buying cost for a turret
+	*/
 	public override void setCost(int costParam)
 	{
 		cost = costParam;
 	}
 
+	/**
+	* Set the damage for a turret
+	*/
 	public override void setDamage(float damageParam)
 	{
 		damage = damageParam;
 	}
 
+	/**
+	* Set the range, the range would be the distance from the turret to the enemy
+	*/
 	public override void setRangeFromEnemy(float rangeParam)
 	{
 		rangeFromEnemy = rangeParam;
 	}
 
+	/**
+	* Set the buying cost for a turret
+	*/
 	public override float getCoolDownTime()
 	{
 		return fireCooldown;
 	}
 
+	/**
+	* Get the attack radius
+	*/
 	public override float getAttackRadius()
 	{
 		return attackRadius;
 	}
 
+	/**
+	* Get the the cost
+	*/
 	public override int getCost()
 	{
 		return cost;
 	}
 
+	/**
+	* Get the the damage
+	*/
 	public override float getDamage()
 	{
 		return damage;
 	}
 
+	/**
+	* Get the the range
+	*/
 	public override float getRangeFromEnemy()
 	{
 		return rangeFromEnemy;
 	}
 
+	/**
+	* Function to scan for enemies within the attack radius
+	*/
 	public void scanForEnemies()
 	{
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -123,12 +157,15 @@ public class C_TurretNormal : C_TurretParent {
 		}
 
 	}
-
+		
 	void OnDrawGizmosSelected() {
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(transform.position, attackRadius);
 	}
 
+	/**
+	* Move the turret position back to its initial state after following an enemies position
+	*/
 	void changeToInitialState()
 	{
 		initRot = Quaternion.LookRotation(initDir);

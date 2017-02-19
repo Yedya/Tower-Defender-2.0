@@ -17,7 +17,6 @@ public class C_EnemyNormal : C_EnemyParent {
 		setSpeed(speed);
 		setHealth(health);
 		pathNode = GameObject.Find("Path");
-
 	}
 
 	public void Update () 
@@ -25,26 +24,41 @@ public class C_EnemyNormal : C_EnemyParent {
 		moveTowardsNode();
 	}
 
+	/**
+	* Set the speed of the enemy
+	*/
 	public override void setSpeed(float speedParam)
     {
 		speed = speedParam;
     }
 
+	/**
+	* Set the enemies health 
+	*/
 	public override void setHealth(float healthParam)
     {
         health = healthParam;
     }
 
+	/**
+	* Get the enemies speed
+	*/
 	public override float getSpeed()
     {
         return speed;
     }
 
+	/**
+	* Get the enemies health
+	*/
 	public override float getHealth()
     {
         return health;
     }
 
+	/**
+	* Get the next node in the path
+	*/
 	void GetNextPathNode() {
 		if(pathNodeIndex < pathNode.transform.childCount) 
 		{
@@ -58,12 +72,18 @@ public class C_EnemyNormal : C_EnemyParent {
 		}
 	}
 
+	/**
+	* Enemey has reached the final node in the path of nodes
+	*/
 	void ReachedGoal()
 	{
 		//		GameObject.FindObjectOfType<ScoreManager>().LoseLife();
 		Destroy(gameObject);
 	}
 
+	/**
+	* Move the enemy towards the next node
+	*/
 	void moveTowardsNode()
 	{
 		if(targetPathNode==null)
