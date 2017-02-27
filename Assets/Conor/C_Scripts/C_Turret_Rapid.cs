@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class C_TurretNormal : C_TurretParent {
+public class C_Turret_Rapid : C_TurretParent {
 
 	private Transform turretTrasform ;
 	public GameObject bulletPrefab;
@@ -131,13 +131,13 @@ public class C_TurretNormal : C_TurretParent {
 		foreach(GameObject e in enemies)
 		{
 			float distanceFromEnemy = Vector3.Distance(this.transform.position, e.transform.position);
-			Debug.Log(distanceFromEnemy);
+
 			if(nearestEnemy== null && distanceFromEnemy<attackRadius)	
 			{
 				nearestEnemy = e;
-//				attackRadius = distanceFromEnemy;
+				//				attackRadius = distanceFromEnemy;
 			}
-			if(distanceFromEnemy>attackRadius)	
+			if(nearestEnemy== null)	
 			{
 				changeToInitialState();
 				return;
@@ -147,17 +147,21 @@ public class C_TurretNormal : C_TurretParent {
 
 		enemyDirection = (nearestEnemy.transform.position - this.transform.position);
 		lookRot = Quaternion.LookRotation(enemyDirection);
-		turretTrasform.transform.rotation = Quaternion.Euler( lookRot.eulerAngles.x, lookRot.eulerAngles.y, Time.deltaTime*1.2f );
+
+		turretTrasform.transform.rotation = Quaternion.Lerp(turretTrasform.transform.rotation, lookRot, Time.deltaTime*2);
+
+//		Quaternion.Lerp(transform.rotation, lookRot, Time.deltaTime*2);
+		//turretTrasform.transform.rotation = Quaternion.Euler( lookRot.eulerAngles.x, lookRot.eulerAngles.y, Time.deltaTime*0.2f );
 		fireCoolDownLeft -= Time.deltaTime;
 
 		if(fireCoolDownLeft<=0 && enemyDirection.magnitude <=attackRadius)
 		{
-//			fireCoolDownLeft = fireCooldown;
-//			ShootAt(nearestEnemy);
+			//			fireCoolDownLeft = fireCooldown;
+			//			ShootAt(nearestEnemy);
 		}
 
 	}
-		
+
 	void OnDrawGizmosSelected() {
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(transform.position, attackRadius);

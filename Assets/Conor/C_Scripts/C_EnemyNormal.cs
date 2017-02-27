@@ -78,7 +78,7 @@ public class C_EnemyNormal : C_EnemyParent {
 	void ReachedGoal()
 	{
 		//		GameObject.FindObjectOfType<ScoreManager>().LoseLife();
-		Destroy(gameObject);
+		//Destroy(gameObject);
 	}
 
 	/**
